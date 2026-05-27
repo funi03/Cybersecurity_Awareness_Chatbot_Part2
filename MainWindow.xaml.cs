@@ -108,12 +108,20 @@ namespace Cybersecurity_Awareness_Chatbot_Part2
             // Display user message
             txtChat.AppendText("You: " + userInput + "\n");
 
+            // DETECT SENTIMENT
+            string feeling = sentiment.detect_sentiment(userInput);
+
+            // SHOW SENTIMENT
+            if (feeling != "")
+            {
+                string sentimentResponse = sentiment.sentiment_response(feeling);
+                txtChat.AppendText("SecureBot: " + sentimentResponse + "\n\n");
+            }
+
             // Get chatbot response
             string response = bot.GetResponse(userInput, username);
 
             txtChat.AppendText("SecureBot: " + response + "\n\n");
-
-            txtUserInput.Clear();
         }
 
         // DISPLAY CHAT METHOD

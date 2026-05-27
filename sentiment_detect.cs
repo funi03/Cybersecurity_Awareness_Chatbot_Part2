@@ -1,7 +1,10 @@
-﻿namespace Cybersecurity_Awareness_Chatbot_Part2
+﻿using System.Collections;
+
+namespace Cybersecurity_Awareness_Chatbot_Part2
 {
     public class sentiment_detect
     {
+     
         // METHOD TO DETECT SENTIMENT
         public string detect_sentiment(string message)
         {
@@ -47,6 +50,7 @@
         // METHOD TO RETURN RESPONSE
         public string sentiment_response(string feeling)
         {
+
             // WORRIED RESPONSE
             if (feeling == "worried")
             {
@@ -74,6 +78,8 @@
             // DEFAULT RESPONSE
             return "";
         }
+
+
 
     }
 }

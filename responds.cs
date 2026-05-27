@@ -6,6 +6,7 @@ namespace Cybersecurity_Awareness_Chatbot_Part2
     {
         // RESPONSE ARRAY
         public ArrayList replies = new ArrayList();
+        public ArrayList add_answers = new ArrayList();
 
         // IGNORE WORDS
         public ArrayList ignore = new ArrayList();
@@ -58,6 +59,39 @@ namespace Cybersecurity_Awareness_Chatbot_Part2
             ignore.Add("the");
             ignore.Add("a");
             ignore.Add("an");
+
+            //sentiment detection
+
+            add_answers.Add("frustrated i understand you're frustrated. let's work through the issue step by step.");
+            add_answers.Add("frustrated it's okay to feel frustrated when things aren't working. i'm here to help.");
+            add_answers.Add("frustrated take a breath, we'll fix this together.");
+
+
+            add_answers.Add("confused that's okay, confusion is normal. i'll explain it clearly for you.");
+            add_answers.Add("confused let me break it down step by step so it makes sense.");
+            add_answers.Add("confused no worries, i'll help you understand it better.");
+
+
+            add_answers.Add("worried it's okay to feel worried. i'm here to help you stay safe online.");
+            add_answers.Add("worried don't panic, most cybersecurity issues can be fixed quickly.");
+            add_answers.Add("worried i understand your concern. let's make sure your information is safe.");
+
+
+            add_answers.Add("happy that's great to hear! i'm glad things are going well.");
+            add_answers.Add("happy awesome! positivity is always good.");
+            add_answers.Add("happy i'm happy for you! let me know if you need anything.");
+
+
+            add_answers.Add("sad i'm sorry you're feeling this way. i'm here for you.");
+            add_answers.Add("sad that sounds tough, take things one step at a time.");
+            add_answers.Add("sad i hope things improve soon. you can talk to me anytime.");
+
+
+            add_answers.Add("angry i understand you're angry. let's try solve the issue together.");
+            add_answers.Add("angry it's okay to feel angry, but i'll help you fix the problem.");
+            add_answers.Add("angry take your time, i'm here to help you sort it out.");
+
+
         }
     }
 }
