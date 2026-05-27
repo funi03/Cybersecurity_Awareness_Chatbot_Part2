@@ -5,9 +5,179 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cybersecurity_Awareness_Chatbot_Part2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
-       Background="#FF1E1E1E">
-     <Grid> <!-- parent grid-->
+        Title="MainWindow" Height="450" Width="800">
+    
+
+    <Grid>
+        <!-- start parent grid-->
+
+        <Grid x:Name="home_grid" Visibility="Visible">
+
+            <!-- Logo -->
+            <Image 
+                Source="/Logo.jpeg" 
+                Height="200"
+                Width="300"
+                Margin="0,0,0,200"
+                   />
+            <!-- welcome message-->
+            <TextBlock
+                Text="Welcome to Cybersecurity Awareness Chatbot"
+                Height="50"
+                TextAlignment="Center"
+                Margin="246,255,238,129"
+                FontFamily="Arial Rounded MT Bold" RenderTransformOrigin="0.613,1.957"
+                />
+
+            <!-- button to continue-->
+            <Button 
+                Height="40"
+                Width="300"
+                Margin="250,323,250,71"
+                Content="Start AI"
+                Click="start"
+                />
+
+        </Grid>
         
-    </Grid><!--parent grid-->
+        <!-- USERNAME GRID-->
+
+        <Grid x:Name="username_grid" Visibility="Hidden">
+
+
+            <!-- Logo -->
+            <Image 
+        Source="/Logo.jpeg" 
+        Height="200"
+        Width="300"
+        Margin="0,0,0,200"
+           />
+            <!-- Hint message-->
+            <TextBlock
+        Text="Enter username"
+        Height="20"
+        Width="270"
+        TextAlignment="Justify"
+        Margin="0,30,0,0"
+        FontFamily="Arial Rounded MT Bold"
+        />
+
+            <!-- Enter/Prompt username-->
+            <TextBox
+        Height="40"
+        Width="270"
+        TextAlignment="Center"
+        Margin="0,100,0,0"
+        FontFamily="Arial Rounded MT Bold"
+        x:Name="usernames_input"
+        />
+
+            <!-- error message-->
+            <TextBlock
+             Text="please enter username to continue..."
+             Height="20"
+             Width="270"
+             TextAlignment="Justify"
+             Margin="0,180,0,0"
+             Foreground="Red"
+             FontFamily="Arial Rounded MT Bold"
+              />
+
+            <!-- button to submit name-->
+            <Button 
+               Height="40"
+               Width="270"
+               Margin="0,250,0,0"
+               Content="submit username"
+               Click="submit_name"
+                   />
+
+        </Grid>
+        <!--chat grid-->
+
+        <Grid x:Name="chat_grid" Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="150"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+
+            <!-- HEADER -->
+            <Border Grid.Row="0"
+         CornerRadius="10"
+         Background="#2A2A40"
+         BorderBrush="Cyan"
+         BorderThickness="2">
+
+                <StackPanel Orientation="Horizontal">
+
+                    <!-- LOGO -->
+                    <Image x:Name="imgLogo"
+                Width="120"
+                Height="120"
+                Margin="10"
+                Source="/logo.jpeg"/>
+
+                    <StackPanel VerticalAlignment="Center">
+
+                        <TextBlock Text="SECUREBOT"
+                        FontSize="30"
+                        FontWeight="Bold"
+                        Foreground="Cyan"/>
+
+                        <TextBlock Text="Cybersecurity Awareness Assistant"
+                        FontSize="16"
+                        Foreground="White"/>
+
+                        <TextBlock Text="Stay Safe • Stay Secure • Stay Smart"
+                        FontSize="14"
+                        Foreground="LightGray"/>
+
+                    </StackPanel>
+
+                </StackPanel>
+
+            </Border>
+
+            <!-- CHAT AREA -->
+            <TextBox x:Name="txtChat"
+          Grid.Row="1"
+          Margin="0,10,0,10"
+          FontSize="14"
+          Background="HotPink"
+          Foreground="Lime"
+          IsReadOnly="True"
+          VerticalScrollBarVisibility="Auto"
+          TextWrapping="Wrap"
+          AcceptsReturn="True"/>
+
+            <!-- INPUT SECTION -->
+            <Grid Grid.Row="2">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="120"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="txtUserInput"
+              Grid.Column="0"
+              Height="35"
+              Margin="0,10,10,10"
+              FontSize="14"/>
+
+
+
+                <Button x:Name="btnSend"
+             Grid.Column="1"
+             Height="35"
+             Margin="0,10,0,10"
+             Content="Send"
+             FontWeight="Bold"
+             Background="Cyan"
+             Click="btnSend_Click"/>
+
+            </Grid>
+        </Grid>
+    </Grid>
+    <!-- end parent grid -->
 </Window>

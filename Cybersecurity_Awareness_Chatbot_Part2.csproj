@@ -55,6 +55,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="chatbot.cs" />
+    <Compile Include="helper.cs" />
+    <Compile Include="memory_recall.cs" />
+    <Compile Include="responds.cs" />
+    <Compile Include="sentiment_detect.cs" />
+    <Compile Include="user_name.cs" />
+    <Compile Include="voice_greeting.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
