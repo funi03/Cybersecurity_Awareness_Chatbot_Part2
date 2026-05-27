@@ -23,7 +23,7 @@ namespace Cybersecurity_Awareness_Chatbot_Part2
         }
 
         // MAIN CHATBOT METHOD
-        public string GetResponse(string question)
+        public string GetResponse(string question, string username)
         {
             // LOWERCASE
             question = question.ToLower();

@@ -39,7 +39,8 @@ namespace Cybersecurity_Awareness_Chatbot_Part2
         memory_recall memory = new memory_recall();
 
         chatbot bot;
-
+         
+        
        
         public MainWindow()
         {
@@ -145,9 +146,9 @@ namespace Cybersecurity_Awareness_Chatbot_Part2
 
             messageBorder.Child = text;
 
-            chats.Items.Add(messageBorder);
+            txtChat.AppendText("SecureBot: " + message + "\n\n");
 
-            chats.ScrollIntoView(chats.Items[chats.Count - 1]);
+            txtChat.ScrollToEnd();
         }
 
     }

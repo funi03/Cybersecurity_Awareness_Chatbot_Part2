@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cybersecurity_Awareness_Chatbot_Part2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    
+        Title="MainWindow" Height="450" Width="800"
+        Background="BlueViolet">
 
     <Grid>
         <!-- start parent grid-->
@@ -23,23 +23,25 @@
             <!-- welcome message-->
             <TextBlock
                 Text="Welcome to Cybersecurity Awareness Chatbot"
-                Height="50"
-                TextAlignment="Center"
-                Margin="246,255,238,129"
-                FontFamily="Arial Rounded MT Bold" RenderTransformOrigin="0.613,1.957"
-                />
+                FontSize="26"
+                FontWeight="Bold"
+                Foreground="White"
+                HorizontalAlignment="Center"
+                Margin="0,250,0,0"/>
+                
 
             <!-- button to continue-->
             <Button 
-                Height="40"
-                Width="300"
-                Margin="250,323,250,71"
+                Background="DeepSkyBlue"
+                Height="70"
+                Margin="228,323,227,41"
                 Content="Start AI"
                 Click="start"
+                FontWeight="Bold"
                 />
 
         </Grid>
-        
+
         <!-- USERNAME GRID-->
 
         <Grid x:Name="username_grid" Visibility="Hidden">
@@ -55,26 +57,28 @@
             <!-- Hint message-->
             <TextBlock
         Text="Enter username"
-        Height="20"
-        Width="270"
+        FontSize="20"
+        Foreground="White"
         TextAlignment="Justify"
-        Margin="0,30,0,0"
+         HorizontalAlignment="Center"
+        Margin="0,200,0,0"
         FontFamily="Arial Rounded MT Bold"
         />
 
             <!-- Enter/Prompt username-->
-            <TextBox
+        <TextBox  x:Name="usernames_input"
         Height="40"
         Width="270"
         TextAlignment="Center"
-        Margin="0,100,0,0"
+        Margin="0,200,0,0"
+        FontSize="16"
         FontFamily="Arial Rounded MT Bold"
-        x:Name="usernames_input"
+       
         />
 
             <!-- error message-->
             <TextBlock
-             Text="please enter username to continue..."
+             Text="please enter your name to chat"
              Height="20"
              Width="270"
              TextAlignment="Justify"
@@ -90,6 +94,8 @@
                Margin="0,250,0,0"
                Content="submit username"
                Click="submit_name"
+                FontWeight="Bold"
+                Background="Cyan"
                    />
 
         </Grid>
@@ -145,11 +151,10 @@
           Margin="0,10,0,10"
           FontSize="14"
           Background="HotPink"
-          Foreground="Lime"
-          IsReadOnly="True"
-          VerticalScrollBarVisibility="Auto"
-          TextWrapping="Wrap"
-          AcceptsReturn="True"/>
+          Foreground="White"
+          BorderBrush="Cyan"
+          BorderThickness="2"
+                     />
 
             <!-- INPUT SECTION -->
             <Grid Grid.Row="2">
@@ -175,6 +180,7 @@
              FontWeight="Bold"
              Background="Cyan"
              Click="btnSend_Click"/>
+                
 
             </Grid>
         </Grid>
