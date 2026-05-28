@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 
 namespace Cybersecurity_Awareness_Chatbot_Part2
-{
+{//  start namespace
     public class responds
     {
         // RESPONSE ARRAY
@@ -60,7 +60,7 @@ namespace Cybersecurity_Awareness_Chatbot_Part2
             ignore.Add("a");
             ignore.Add("an");
 
-           
-        }
-    }
-}
+
+        }// end constructor
+    }// end class
+}//     end namespace
