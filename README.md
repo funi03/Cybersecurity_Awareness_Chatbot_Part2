@@ -138,10 +138,12 @@ This prevents crashes and improves user experience.
 This project was created for educational purposes as part of a Cybersecurity Awareness Chatbot assignment.
 
 ---
+# Youtube link
+https://youtube.com/shorts/olQCV1FxqpY?feature=share
 
 # Author
 
-Developed by: Funie
+Developed by: Funanani Nelitshindwe
 
 ---
 
