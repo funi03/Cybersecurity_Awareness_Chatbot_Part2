@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace Cybersecurity_Awareness_Chatbot_Part2
 {
-    internal class helper
+    public class helper
     {
         // REMOVE SPECIAL CHARACTERS
         public string clean_text(string input)
