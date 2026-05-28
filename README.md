@@ -146,8 +146,9 @@ https://youtube.com/shorts/olQCV1FxqpY?feature=share
 
 #Commit Screenshot
 
-<img width="1365" height="524" alt="Screenshot 2026-05-28 233204" src="https://github.com/user-attachments/assets/72fbaac0-2b34-427f-92f0-c1db29b884b8" />
-<img width="1365" height="524" alt="Screenshot 2026-05-28 233204" src="https://github.com/user-attachments/assets/65bda2ab-c06b-47b3-bd97-ae9a43086c69" />
+<img width="1348" height="635" alt="Screenshot 2026-05-28 233349" src="https://github.com/user-attachments/assets/d0127257-f97b-4100-bbe6-24bb7784d524" />
+
+<img width="1365" height="647" alt="Screenshot 2026-05-28 233422" src="https://github.com/user-attachments/assets/5e9b0007-ca11-4a45-9257-87052eb13596" />
 
 ---
 
