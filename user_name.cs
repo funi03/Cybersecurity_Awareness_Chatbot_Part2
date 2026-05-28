@@ -3,9 +3,9 @@ using System.Text.RegularExpressions;
 using System.Windows.Controls;
 
 namespace Cybersecurity_Awareness_Chatbot_Part2
-{
-   public class user_name
-    {
+{//  start namespace
+    public class user_name
+    {//  start class
         // FILE NAME
         string file = "users.txt";
 
@@ -87,7 +87,7 @@ namespace Cybersecurity_Awareness_Chatbot_Part2
             }
 
             return false;
-        }
+        }//end
 
-    }
-}
+    }// end class
+}//end namespace
