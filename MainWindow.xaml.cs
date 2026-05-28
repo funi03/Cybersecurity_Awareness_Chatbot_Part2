@@ -66,6 +66,13 @@ namespace Cybersecurity_Awareness_Chatbot_Part2
 
         private void submit_name(object sender, RoutedEventArgs e)
         {
+            // validate username input
+            if(string.IsNullOrWhiteSpace(usernames_input.Text))
+            {
+                MessageBox.Show("Please enter a valid username.", "Invalid Username", MessageBoxButton.OK, MessageBoxImage.Warning);
+                usernames_input.Focus();
+                return;
+            }
             // GET USERNAME
             username = user.submit_name(usernames_input);
 
