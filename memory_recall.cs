@@ -2,9 +2,9 @@
 using System.IO;
 
 namespace Cybersecurity_Awareness_Chatbot_Part2
-{
+{//  start namespace
     public class memory_recall
-    {
+    {//  start class
         // FILE NAME
         private string filename = "memory.txt";
 
@@ -84,5 +84,5 @@ namespace Cybersecurity_Awareness_Chatbot_Part2
             return "";
         }
 
-    }
-}
+    }// end class
+}// end namespace   
