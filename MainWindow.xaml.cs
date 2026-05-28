@@ -140,13 +140,16 @@ namespace Cybersecurity_Awareness_Chatbot_Part2
             {
                 string sentimentResponse = sentiment.sentiment_response(feeling);
 
-                txtChat.AppendText( "SecureBot: " + sentimentResponse +"\n\n");
+                txtChat.AppendText("SecureBot: " + sentimentResponse + "\n\n");
             }
+            // if no sentiment is found 
+            if (feeling == "neutral")
+            {
+                // Get chatbot response
+                string response = bot.GetResponse(userInput, username);
 
-            // Get chatbot response
-            string response = bot.GetResponse(userInput, username);
-
-            txtChat.AppendText( "SecureBot: " +  response +  "\n\n");
+                txtChat.AppendText("SecureBot: " + response + "\n\n");
+            }
         }
         // DISPLAY CHAT METHOD
         private void error_method(string name, string message)
