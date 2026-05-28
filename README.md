@@ -111,20 +111,6 @@ This prevents crashes and improves user experience.
 
 ---
 
-# Project Structure
-
-## Classes Used
-
-| Class            | Purpose                   |
-| ---------------- | ------------------------- |
-| MainWindow       | Main GUI window           |
-| chatbot          | Handles chatbot responses |
-| responds         | Stores chatbot replies    |
-| sentiment_detect | Detects user emotions     |
-| memory_recall    | Handles saved memory      |
-| user_name        | Username validation       |
-| helper           | Cleans user input         |
-| voice_greeting   | Plays welcome audio       |
 
 ---
 
@@ -156,6 +142,7 @@ This project was created for educational purposes as part of a Cybersecurity Awa
 
 # Author
 
-Developed by: Funanani Nelitshindwe 
+Developed by: Funie
 
 ---
+
