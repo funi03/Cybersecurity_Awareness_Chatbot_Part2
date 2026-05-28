@@ -1,6 +1,5 @@
 # Cybersecurity_Awareness_Chatbot_Part2
 
-
 ## Overview
 
 SecureBot is a Cybersecurity Awareness Chatbot developed using **C# WPF (.NET Framework 4.7.2)**.
