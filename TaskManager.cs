@@ -1,4 +1,4 @@
-﻿using Cybersecurity_Awareness_Chatbot_Part2.Cybersecurity_Awareness_Chatbot_Part2;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
