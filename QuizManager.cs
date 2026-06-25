@@ -304,15 +304,15 @@ namespace Cybersecurity_Awareness_Chatbot_Part2
                 if (percentage >= 90)
                     return "⭐ Exceptional! You're a cybersecurity expert! Keep up the great work!";
                 else if (percentage >= 80)
-                    return "🌟 Excellent! You have strong cybersecurity knowledge!";
+                    return " Excellent! You have strong cybersecurity knowledge!";
                 else if (percentage >= 70)
-                    return "👍 Good job! You're well on your way to becoming cybersecurity savvy!";
+                    return " Good job! You're well on your way to becoming cybersecurity savvy!";
                 else if (percentage >= 60)
-                    return "📚 Good effort! Keep learning to improve your cybersecurity knowledge!";
+                    return " Good effort! Keep learning to improve your cybersecurity knowledge!";
                 else if (percentage >= 50)
-                    return "📖 You're making progress! Review the topics you missed to improve.";
+                    return " You're making progress! Review the topics you missed to improve.";
                 else
-                    return "📝 Keep learning! Cybersecurity is important. Review the explanations and try again!";
+                    return " Keep learning! Cybersecurity is important. Review the explanations and try again!";
             }
 
             // ============ SCORING METHODS ============
@@ -433,19 +433,19 @@ namespace Cybersecurity_Awareness_Chatbot_Part2
                 var categoryBreakdown = GetCategoryBreakdown();
                 var difficultyBreakdown = GetDifficultyBreakdown();
 
-                string summary = $"📊 Quiz Summary\n";
+                string summary = $" Quiz Summary\n";
                 summary += $"━━━━━━━━━━━━━━━━━━━━━━━\n";
-                summary += $"📝 Total Questions: {totalQuestions}\n";
+                summary += $" Total Questions: {totalQuestions}\n";
                 summary += $"⭐ Current Score: {score} points\n";
-                summary += $"📈 Progress: {GetProgress():F1}%\n\n";
+                summary += $" Progress: {GetProgress():F1}%\n\n";
 
-                summary += "📂 Categories:\n";
+                summary += " Categories:\n";
                 foreach (var cat in categoryBreakdown)
                 {
                     summary += $"   • {cat.Key}: {cat.Value} questions\n";
                 }
 
-                summary += "\n📊 Difficulties:\n";
+                summary += "\n Difficulties:\n";
                 foreach (var diff in difficultyBreakdown)
                 {
                     string diffText = diff.Key == 1 ? "Easy" : diff.Key == 2 ? "Medium" : "Hard";
