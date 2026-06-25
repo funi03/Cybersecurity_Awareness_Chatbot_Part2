@@ -17,16 +17,17 @@ namespace Cybersecurity_Awareness_Chatbot_Part2
             {
                 this.logger = logger;
 
-                // ================================================
-                // TRY BOTH CONNECTION STRINGS
-                // ================================================
-                // Try LocalDB first
-                connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=chatbot_task;Integrated Security=True;";
+            // ================================================
+            // TRY BOTH CONNECTION STRINGS
+            // ================================================
+            // Try LocalDB first
+            string connection = @"Data source = (localdb)\task_cyber,Database=cyber_task";
 
-                // If that fails, try SQL Express
-                // connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=chatbot_task;Integrated Security=True;";
 
-                TestConnection();
+            // If that fails, try SQL Express
+            // connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=chatbot_task;Integrated Security=True;";
+
+            TestConnection();
                 CreateTableIfNotExists();
                 logger?.LogDatabaseConnection(isConnected, "TaskManager initialized");
             }
