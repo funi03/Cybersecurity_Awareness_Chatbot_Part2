@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
@@ -23,28 +24,42 @@ namespace Cybersecurity_Awareness_Chatbot_Part2
     {//  start class
 
 
-        // variables
-        string username = string.Empty;
-       
+        // FIELDS 
+        private string username = string.Empty;
 
-        // Objects classes
-        responds data = new responds();
+        // Part 2 Components
+        private responds data;
+        private helper clean;
+        private user_name user;
+        private sentiment_detect sentiment;
+        private memory_recall memory;
+        private chatbot bot;
+        private ActivityLogger logger;
 
-        helper clean = new helper();
+        // Part 3 Components
+        private TaskManager taskManager;
+        private QuizManager quizManager;
 
-        user_name user = new user_name();
+        // Quiz State
+        private List<Question_in_quiz> quizQuestions;
+        private int currentQuizIndex = 0;
+        private int quizScore = 0;
+        private bool isQuizAnswered = false;
+        private List<RadioButton> quizOptionButtons;
 
-        sentiment_detect sentiment = new sentiment_detect();
+        // Task Display
+        private ObservableCollection<TaskDisplayItem> taskItems;
 
-        memory_recall memory = new memory_recall();
+        // Log Display
+        private ObservableCollection<LogDisplayItem> logItems;
 
-        chatbot bot;
+        // Counter for interests
+        private int counting = 0;
 
 
 
-         
-        
-       
+
+
         public MainWindow()
         {
             InitializeComponent();
