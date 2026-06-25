@@ -1,120 +1,96 @@
-﻿<Window x:Class="Cybersecurity_Awareness_Chatbot_Part2.MainWindow"
+﻿
+       <Window x:Class="Cybersecurity_Awareness_Chatbot_Part2.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Cybersecurity_Awareness_Chatbot_Part2"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="SECUREBOT - Cybersecurity Awareness Chatbot" 
+        Height="800" Width="1200"
+        WindowStartupLocation="CenterScreen"
         Background="#101728">
-
 
     <Grid>
         <!-- start parent grid-->
 
+        <!-- ============================================ -->
+        <!-- HOME GRID -->
+        <!-- ============================================ -->
         <Grid x:Name="home_grid"
-      Background="#0B1020"
-      Visibility="Visible">
+              Background="#0B1020"
+              Visibility="Visible">
 
             <!-- CENTER CONTENT -->
-            <StackPanel
-        VerticalAlignment="Center"
-        HorizontalAlignment="Center">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
 
                 <!-- LOGO -->
-                <Image 
-            Source="/Logo.jpeg"
-            Width="220"
-            Height="220"
-            Margin="0,0,0,20"/>
+                <Image Source="/Logo.jpeg" Width="220" Height="220" Margin="0,0,0,20"/>
 
                 <!-- WELCOME MESSAGE -->
-                <TextBlock
-            Text="Welcome to Cybersecurity Awareness Chatbot"
-            FontSize="28"
-            FontWeight="Bold"
-            Foreground="White"
-            HorizontalAlignment="Center"
-            TextAlignment="Center"
-            Margin="0,0,0,40"/>
+                <TextBlock Text="Welcome to Cybersecurity Awareness Chatbot"
+                           FontSize="28" FontWeight="Bold"
+                           Foreground="White"
+                           HorizontalAlignment="Center"
+                           TextAlignment="Center"
+                           Margin="0,0,0,40"/>
 
                 <!-- START BUTTON -->
-                <Button
-            Content="Start AI"
-            Width="250"
-            Height="50"
-            FontSize="18"
-            FontWeight="Bold"
-            Background="#00E5FF"
-            Foreground="Black"
-            BorderBrush="Transparent"
-            Click="start"/>
+                <Button Content="Start AI"
+                        Width="250" Height="50"
+                        FontSize="18" FontWeight="Bold"
+                        Background="#00E5FF" Foreground="Black"
+                        BorderBrush="Transparent"
+                        Cursor="Hand"
+                        Click="start"/>
 
             </StackPanel>
-
         </Grid>
-        <!-- USERNAME GRID-->
-        <Grid x:Name="username_grid"
-      Background="#0B1020"
-      Visibility="Hidden">
 
-            <StackPanel
-        VerticalAlignment="Center"
-        HorizontalAlignment="Center"
-        Width="350">
+        <!-- ============================================ -->
+        <!-- USERNAME GRID -->
+        <!-- ============================================ -->
+        <Grid x:Name="username_grid"
+              Background="#0B1020"
+              Visibility="Hidden">
+
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="350">
 
                 <!-- LOGO -->
-                <Image
-            Source="/Logo.jpeg"
-            Width="180"
-            Height="180"
-            Margin="0,0,0,20"/>
+                <Image Source="/Logo.jpeg" Width="180" Height="180" Margin="0,0,0,20"/>
 
                 <!-- TITLE -->
-                <TextBlock
-            Text="Enter Username"
-            FontSize="28"
-            FontWeight="Bold"
-            Foreground="White"
-            HorizontalAlignment="Center"
-            Margin="0,0,0,20"/>
+                <TextBlock Text="Enter Username"
+                           FontSize="28" FontWeight="Bold"
+                           Foreground="White"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,20"/>
 
                 <!-- USERNAME BOX -->
-                <TextBox
-            x:Name="usernames_input"
-            Height="40"
-            FontSize="16"
-            Padding="10"
-            Margin="0,0,0,10"
-            Background="#101728"
-            Foreground="White"
-            BorderBrush="#00E5FF"/>
+                <TextBox x:Name="usernames_input"
+                         Height="40" FontSize="16" Padding="10"
+                         Margin="0,0,0,10"
+                         Background="#101728" Foreground="White"
+                         BorderBrush="#00E5FF" BorderThickness="1"
+                         KeyDown="UsernamesInput_KeyDown"/>
 
                 <!-- ERROR MESSAGE -->
-                <TextBlock
-            x:Name="txtError"
-            Text="Please enter username to start chatting..."
-            FontSize="13"
-            Foreground="Red"
-            HorizontalAlignment="Center"
-            Margin="0,0,0,20"/>
+                <TextBlock x:Name="txtError"
+                           Text="Please enter username to start chatting..."
+                           FontSize="13" Foreground="Red"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,20"/>
 
                 <!-- SUBMIT BUTTON -->
-                <Button
-            Content="Submit Username"
-            Height="45"
-            FontSize="16"
-            FontWeight="Bold"
-            Background="#00E5FF"
-            Foreground="Black"
-            BorderBrush="Transparent"
-            Click="submit_name"/>
+                <Button Content="Submit Username"
+                        Height="45" FontSize="16" FontWeight="Bold"
+                        Background="#00E5FF" Foreground="Black"
+                        BorderBrush="Transparent"
+                        Cursor="Hand"
+                        Click="submit_name"/>
 
             </StackPanel>
-
         </Grid>
-        <!--chat grid-->
 
+        <!-- ============================================ -->
+        <!-- CHAT GRID (UPDATED) -->
+        <!-- ============================================ -->
         <Grid x:Name="chat_grid" Visibility="Hidden">
             <Grid.RowDefinitions>
                 <RowDefinition Height="150"/>
@@ -122,83 +98,461 @@
                 <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
 
-            <!-- HEADER -->
+            <!-- HEADER (UPDATED WITH NAVIGATION BUTTONS) -->
             <Border Grid.Row="0"
-         CornerRadius="10"
-         Background="#2A2A40"
-         BorderBrush="Cyan"
-         BorderThickness="2">
+                    CornerRadius="10"
+                    Background="#2A2A40"
+                    BorderBrush="#00E5FF"
+                    BorderThickness="2"
+                    Margin="10,10,10,5">
 
-                <StackPanel Orientation="Horizontal">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
 
                     <!-- LOGO -->
                     <Image x:Name="imgLogo"
-                Width="120"
-                Height="120"
-                Margin="10"
-                Source="/logo.jpeg"/>
+                           Grid.Column="0"
+                           Width="100" Height="100"
+                           Margin="10"
+                           Source="/logo.jpeg"/>
 
-                    <StackPanel VerticalAlignment="Center">
-
+                    <!-- TITLE -->
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="10,0">
                         <TextBlock Text="SECUREBOT"
-                        FontSize="30"
-                        FontWeight="Bold"
-                        Foreground="Cyan"/>
-
+                                   FontSize="30" FontWeight="Bold"
+                                   Foreground="#00E5FF"/>
                         <TextBlock Text="Cybersecurity Awareness Chatbot"
-                        FontSize="16"
-                        Foreground="White"/>
-
-                        <TextBlock Text="Stay Safe • Stay Secure • Stay Smart"
-                        FontSize="14"
-                        Foreground="LightGray"/>
-
+                                   FontSize="16" Foreground="White"/>
+                        <TextBlock x:Name="UserDisplay"
+                                   Text="Stay Safe • Stay Secure • Stay Smart"
+                                   FontSize="14" Foreground="#888888"/>
                     </StackPanel>
 
-                </StackPanel>
-
+                    <!-- NAVIGATION BUTTONS (NEW) -->
+                    <StackPanel Grid.Column="2" Orientation="Horizontal" 
+                                VerticalAlignment="Center" Margin="10">
+                        <Button Content="📋 Tasks"
+                                Width="85" Height="35" Margin="0,0,5,0"
+                                Background="#2A2A40" Foreground="#00E5FF"
+                                BorderBrush="#00E5FF" BorderThickness="1"
+                                Cursor="Hand"
+                                Click="TasksButton_Click"/>
+                        <Button Content="🎯 Quiz"
+                                Width="85" Height="35" Margin="0,0,5,0"
+                                Background="#2A2A40" Foreground="#00E5FF"
+                                BorderBrush="#00E5FF" BorderThickness="1"
+                                Cursor="Hand"
+                                Click="QuizButton_Click"/>
+                        <Button Content="📝 Log"
+                                Width="85" Height="35" Margin="0,0,5,0"
+                                Background="#2A2A40" Foreground="#00E5FF"
+                                BorderBrush="#00E5FF" BorderThickness="1"
+                                Cursor="Hand"
+                                Click="LogButton_Click"/>
+                        <Button Content="❌ Exit"
+                                Width="85" Height="35"
+                                Background="#FF4444" Foreground="White"
+                                BorderBrush="DarkRed" BorderThickness="1"
+                                Cursor="Hand"
+                                Click="ExitButton_Click"/>
+                    </StackPanel>
+                </Grid>
             </Border>
 
-            <!-- CHAT AREA -->
-            <TextBox x:Name="txtChat"
-          Grid.Row="1"
-          Margin="0,10,0,10"
-          FontSize="14"
-          Background="#101728"
-          Foreground="White"
-          BorderBrush="Cyan"
-          BorderThickness="2"
-                     />
+            <!-- CHAT AREA (UPDATED TO RichTextBox) -->
+            <Border Grid.Row="1"
+                    Margin="10,5,10,5"
+                    Background="#101728"
+                    BorderBrush="#00E5FF" BorderThickness="2"
+                    CornerRadius="10">
+                <RichTextBox x:Name="txtChat"
+                             Background="#101728"
+                             Foreground="White"
+                             FontSize="14"
+                             BorderThickness="0"
+                             IsReadOnly="True"
+                             VerticalScrollBarVisibility="Auto">
+                    <RichTextBox.Resources>
+                        <Style TargetType="{x:Type Paragraph}">
+                            <Setter Property="Margin" Value="0,2,0,2"/>
+                        </Style>
+                    </RichTextBox.Resources>
+                </RichTextBox>
+            </Border>
 
-            <!-- INPUT SECTION -->
-            <Grid Grid.Row="2">
-
+            <!-- INPUT SECTION (UPDATED WITH MORE BUTTONS) -->
+            <Grid Grid.Row="2" Margin="10,0,10,10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
                 <TextBox x:Name="txtUserInput"
-              Grid.Column="0"
-              Height="35"
-              Margin="0,10,10,10"
-              FontSize="14"/>
-
-
+                         Grid.Column="0"
+                         Height="35"
+                         Margin="0,0,10,0"
+                         FontSize="14"
+                         Background="#1A1A2E"
+                         Foreground="White"
+                         BorderBrush="#00E5FF"
+                         BorderThickness="1"
+                         KeyDown="TxtUserInput_KeyDown"/>
 
                 <Button x:Name="btnSend"
-             Grid.Column="1"
-             Height="35"
-             Margin="0,10,0,10"
-             Content="Send"
-             FontWeight="Bold"
-            Background="#00E5FF"
-            Foreground="Black"
-             Click="btnSend_Click"/>
+                        Grid.Column="1"
+                        Height="35" Width="80"
+                        Margin="0,0,5,0"
+                        Content="📤 Send"
+                        FontWeight="Bold"
+                        Background="#00E5FF"
+                        Foreground="Black"
+                        Cursor="Hand"
+                        Click="btnSend_Click"/>
 
+                <Button x:Name="btnQuiz"
+                        Grid.Column="2"
+                        Height="35" Width="80"
+                        Margin="0,0,5,0"
+                        Content="🎯 Quiz"
+                        FontWeight="Bold"
+                        Background="#9B59B6"
+                        Foreground="White"
+                        Cursor="Hand"
+                        Click="QuizButton_Click"/>
 
+                <Button x:Name="btnTasks"
+                        Grid.Column="3"
+                        Height="35" Width="80"
+                        Content="📋 Tasks"
+                        FontWeight="Bold"
+                        Background="#2C3E50"
+                        Foreground="White"
+                        Cursor="Hand"
+                        Click="TasksButton_Click"/>
             </Grid>
         </Grid>
+
+        <!-- ============================================ -->
+        <!-- TASKS GRID (NEW) -->
+        <!-- ============================================ -->
+        <Grid x:Name="tasks_grid" Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <Border Grid.Row="0" Background="#2A2A40" Padding="15" Margin="10,10,10,5"
+                    CornerRadius="10" BorderBrush="#00E5FF" BorderThickness="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="📋 Cybersecurity Tasks" 
+                               FontSize="24" FontWeight="Bold" 
+                               Foreground="#00E5FF"/>
+                    <Button Grid.Column="1" Content="↻ Refresh"
+                            Background="#00E5FF" Foreground="Black"
+                            FontWeight="Bold" Padding="15,8"
+                            Cursor="Hand"
+                            Click="RefreshTasksButton_Click"/>
+                </Grid>
+            </Border>
+
+            <!-- Task Content -->
+            <Grid Grid.Row="1" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="350"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Task List -->
+                <Border Grid.Column="0" Background="#1A1A2E" 
+                        CornerRadius="10" BorderBrush="#00E5FF" 
+                        BorderThickness="1" Margin="0,0,10,0">
+                    <ListBox x:Name="TaskListBox" 
+                             Background="Transparent" BorderThickness="0"
+                             Foreground="White" FontSize="14"
+                             MouseDoubleClick="TaskListBox_MouseDoubleClick">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border Margin="5" Padding="10" 
+                                        CornerRadius="5" 
+                                        Background="{Binding BorderBackground}"
+                                        BorderBrush="#00E5FF"
+                                        BorderThickness="1">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" 
+                                                   Text="{Binding StatusIcon}" 
+                                                   FontSize="20" Margin="0,0,10,0"/>
+                                        <StackPanel Grid.Column="1">
+                                            <TextBlock Text="{Binding Title}" 
+                                                       FontWeight="SemiBold" 
+                                                       Foreground="White"/>
+                                            <TextBlock Text="{Binding Description}" 
+                                                       Foreground="#888888" 
+                                                       FontSize="12"/>
+                                            <TextBlock Text="{Binding DueDateDisplay}" 
+                                                       Foreground="#666666" 
+                                                       FontSize="11"/>
+                                        </StackPanel>
+                                        <TextBlock Grid.Column="2" 
+                                                   Text="{Binding PriorityIcon}" 
+                                                   FontSize="16" Margin="10,0,0,0"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Border>
+
+                <!-- Add Task Panel -->
+                <Border Grid.Column="1" Background="#1A1A2E" 
+                        CornerRadius="10" BorderBrush="#00E5FF" 
+                        BorderThickness="1" Padding="15">
+                    <StackPanel>
+                        <TextBlock Text="➕ Add New Task" 
+                                   FontSize="18" FontWeight="Bold" 
+                                   Foreground="White" Margin="0,0,0,15"/>
+
+                        <TextBlock Text="Title" Foreground="#888888" FontSize="12"/>
+                        <TextBox x:Name="TaskTitleInput" Height="30" 
+                                 Margin="0,5,0,10" Padding="5"
+                                 Background="#101728" Foreground="White"
+                                 BorderBrush="#00E5FF" BorderThickness="1"/>
+
+                        <TextBlock Text="Description" Foreground="#888888" FontSize="12"/>
+                        <TextBox x:Name="TaskDescriptionInput" Height="60" 
+                                 Margin="0,5,0,10" Padding="5"
+                                 Background="#101728" Foreground="White"
+                                 BorderBrush="#00E5FF" BorderThickness="1"
+                                 TextWrapping="Wrap"/>
+
+                        <TextBlock Text="Due Date" Foreground="#888888" FontSize="12"/>
+                        <DatePicker x:Name="TaskDueDatePicker" 
+                                    Margin="0,5,0,10"
+                                    Background="#101728" Foreground="White"
+                                    BorderBrush="#00E5FF" BorderThickness="1"/>
+
+                        <TextBlock Text="Priority" Foreground="#888888" FontSize="12"/>
+                        <ComboBox x:Name="TaskPriorityCombo" 
+                                  Margin="0,5,0,15" Height="30"
+                                  Background="#101728" Foreground="White"
+                                  BorderBrush="#00E5FF" BorderThickness="1">
+                            <ComboBoxItem Content="🟢 Low"/>
+                            <ComboBoxItem Content="🟡 Medium" IsSelected="True"/>
+                            <ComboBoxItem Content="🟠 High"/>
+                            <ComboBoxItem Content="🔴 Critical"/>
+                        </ComboBox>
+
+                        <Button Content="✅ Add Task" Height="40"
+                                Background="#27AE60" Foreground="White"
+                                FontWeight="Bold"
+                                Cursor="Hand"
+                                Click="AddTaskButton_Click"/>
+
+                        <Button Content="🔔 Set Reminder" Height="40"
+                                Margin="0,10,0,0"
+                                Background="#F39C12" Foreground="White"
+                                FontWeight="Bold"
+                                Cursor="Hand"
+                                Click="SetReminderButton_Click"/>
+
+                        <Button Content="⬅ Back to Chat" Height="40"
+                                Margin="0,10,0,0"
+                                Background="#2C3E50" Foreground="White"
+                                FontWeight="Bold"
+                                Cursor="Hand"
+                                Click="BackToChatFromTasks_Click"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
+
+        <!-- ============================================ -->
+        <!-- QUIZ GRID (NEW) -->
+        <!-- ============================================ -->
+        <Grid x:Name="quiz_grid" Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <Border Grid.Row="0" Background="#2A2A40" Padding="15" Margin="10,10,10,5"
+                    CornerRadius="10" BorderBrush="#00E5FF" BorderThickness="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="🎯 Cybersecurity Quiz" 
+                               FontSize="24" FontWeight="Bold" 
+                               Foreground="#00E5FF"/>
+                    <TextBlock Grid.Column="1" x:Name="QuizScoreDisplay" 
+                               Text="⭐ Score: 0" FontSize="18" 
+                               Foreground="#F1C40F" Margin="0,0,20,0"/>
+                    <TextBlock Grid.Column="2" x:Name="QuizCounter" 
+                               Text="0 / 0" FontSize="16" 
+                               Foreground="#888888"/>
+                </Grid>
+            </Border>
+
+            <!-- Quiz Content -->
+            <Border Grid.Row="1" Background="#1A1A2E" 
+                    CornerRadius="10" BorderBrush="#00E5FF" 
+                    BorderThickness="1" Margin="10" Padding="20">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Category and Question -->
+                    <StackPanel Grid.Row="0" Margin="0,0,0,20">
+                        <Border Background="#2A2A40" CornerRadius="5" 
+                                Padding="10" HorizontalAlignment="Left">
+                            <TextBlock x:Name="QuizCategoryDisplay" 
+                                       Text="Category" FontWeight="SemiBold"
+                                       Foreground="#00E5FF"/>
+                        </Border>
+                        <TextBlock x:Name="QuizQuestionText" 
+                                   FontSize="20" FontWeight="SemiBold" 
+                                   TextWrapping="Wrap" Margin="0,15,0,0"
+                                   Foreground="White"/>
+                    </StackPanel>
+
+                    <!-- Options -->
+                    <StackPanel Grid.Row="1" x:Name="QuizOptionsPanel" Margin="0,0,0,20">
+                        <RadioButton x:Name="QuizOptionA" 
+                                    
+                                     Checked="QuizOption_Checked"
+                                     GroupName="QuizGroup"/>
+                        <RadioButton x:Name="QuizOptionB" 
+                                   
+                                     Checked="QuizOption_Checked"
+                                     GroupName="QuizGroup"/>
+                        <RadioButton x:Name="QuizOptionC" 
+                                     
+                                     Checked="QuizOption_Checked"
+                                     GroupName="QuizGroup"/>
+                        <RadioButton x:Name="QuizOptionD" 
+                                    
+                                     Checked="QuizOption_Checked"
+                                     GroupName="QuizGroup"/>
+                    </StackPanel>
+
+                    <!-- Feedback and Controls -->
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="0" x:Name="QuizFeedbackArea" 
+                                CornerRadius="5" Padding="10"
+                                Background="#2A2A40" 
+                                BorderBrush="#00E5FF" BorderThickness="1"
+                                Visibility="Collapsed" Margin="0,0,10,0">
+                            <TextBlock x:Name="QuizFeedbackText" 
+                                       TextWrapping="Wrap" Foreground="White"/>
+                        </Border>
+
+                        <Button Grid.Column="1" x:Name="QuizNextButton" 
+                                Content="Next ➜" Width="120" Height="40"
+                                Background="#00E5FF" Foreground="Black"
+                                FontWeight="Bold"
+                                IsEnabled="False"
+                                Cursor="Hand"
+                                Click="QuizNextButton_Click"
+                                Margin="0,0,10,0"/>
+
+                        <Button Grid.Column="2" x:Name="QuizBackButton" 
+                                Content="⬅ Back" Width="100" Height="40"
+                                Background="#2C3E50" Foreground="White"
+                                FontWeight="Bold"
+                                Cursor="Hand"
+                                Click="QuizBackButton_Click"/>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- ============================================ -->
+        <!-- LOG GRID (NEW) -->
+        <!-- ============================================ -->
+        <Grid x:Name="log_grid" Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <Border Grid.Row="0" Background="#2A2A40" Padding="15" Margin="10,10,10,5"
+                    CornerRadius="10" BorderBrush="#00E5FF" BorderThickness="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="📝 Activity Log" 
+                               FontSize="24" FontWeight="Bold" 
+                               Foreground="#00E5FF"/>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                        <Button Content="↻ Refresh" 
+                                Background="#00E5FF" Foreground="Black"
+                                FontWeight="Bold" Padding="15,8"
+                                Cursor="Hand"
+                                Click="RefreshLogButton_Click" Margin="0,0,10,0"/>
+                        <Button Content="🗑️ Clear" 
+                                Background="#FF4444" Foreground="White"
+                                FontWeight="Bold" Padding="15,8"
+                                Cursor="Hand"
+                                Click="ClearLogButton_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- Log Entries -->
+            <Border Grid.Row="1" Background="#1A1A2E" 
+                    CornerRadius="10" BorderBrush="#00E5FF" 
+                    BorderThickness="1" Margin="10" Padding="10">
+                <ListBox x:Name="LogListBox" 
+                         Background="Transparent" BorderThickness="0"
+                         Foreground="White" FontSize="13">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border Margin="2" Padding="8" 
+                                    CornerRadius="3" 
+                                    Background="{Binding LogBackground}"
+                                    BorderBrush="#00E5FF"
+                                    BorderThickness="0,0,0,1">
+                                <TextBlock Text="{Binding Entry}" 
+                                           FontFamily="Consolas" 
+                                           TextWrapping="Wrap"
+                                           Foreground="{Binding Foreground}"/>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Border>
+        </Grid>
+
     </Grid>
     <!-- end parent grid -->
 </Window>

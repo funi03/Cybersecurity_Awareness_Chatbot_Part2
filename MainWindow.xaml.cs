@@ -956,4 +956,3 @@ namespace Cybersecurity_Awareness_Chatbot_Part2
             public Brush Foreground { get; set; }
         }
     }
-}
