@@ -591,40 +591,253 @@ namespace Cybersecurity_Awareness_Chatbot_Part2
                 }
             }
 
-            private void SetReminderButton_Click(object sender, RoutedEventArgs e)
+        // showinput
+        // ================================================
+        // CUSTOM INPUT DIALOG - ADD THIS METHOD
+        // ================================================
+        private string ShowInputDialog(string title, string prompt, string defaultValue = "")
+        {
+            // Create a simple input dialog window
+            Window dialog = new Window
             {
-                string title = TaskTitleInput.Text.Trim();
-                if (string.IsNullOrWhiteSpace(title))
+                Title = title,
+                Width = 450,
+                Height = 250,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                Background = new SolidColorBrush(Color.FromRgb(16, 23, 40)),
+                Foreground = System.Windows.Media.Brushes.White,
+                ResizeMode = ResizeMode.NoResize,
+                Owner = this
+            };
+
+            // Main panel
+            StackPanel panel = new StackPanel { Margin = new Thickness(20) };
+
+            // Prompt text
+            TextBlock promptText = new TextBlock
+            {
+                Text = prompt,
+                TextWrapping = TextWrapping.Wrap,
+                FontSize = 14,
+                Foreground = System.Windows.Media.Brushes.White,
+                Margin = new Thickness(0, 0, 0, 15)
+            };
+            panel.Children.Add(promptText);
+
+            // Input box
+            TextBox inputBox = new TextBox
+            {
+                Text = defaultValue,
+                Height = 35,
+                FontSize = 14,
+                Background = new SolidColorBrush(Color.FromRgb(16, 23, 40)),
+                Foreground = System.Windows.Media.Brushes.White,
+                BorderBrush = new SolidColorBrush(Color.FromRgb(0, 229, 255)),
+                BorderThickness = new Thickness(1),
+                Padding = new Thickness(10, 5, 10, 5)
+            };
+            panel.Children.Add(inputBox);
+
+            // Buttons panel
+            StackPanel buttonPanel = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                HorizontalAlignment = HorizontalAlignment.Right,
+                Margin = new Thickness(0, 15, 0, 0)
+            };
+
+            // OK Button
+            Button okButton = new Button
+            {
+                Content = "✅ OK",
+                Width = 90,
+                Height = 35,
+                Margin = new Thickness(0, 0, 10, 0),
+                Background = new SolidColorBrush(Color.FromRgb(0, 229, 255)),
+                Foreground = System.Windows.Media.Brushes.Black,
+                FontWeight = FontWeights.Bold,
+                FontSize = 14,
+                Cursor = Cursors.Hand
+            };
+            okButton.Click += (s, e) => { dialog.DialogResult = true; dialog.Close(); };
+            buttonPanel.Children.Add(okButton);
+
+            // Cancel Button
+            Button cancelButton = new Button
+            {
+                Content = "❌ Cancel",
+                Width = 90,
+                Height = 35,
+                Background = new SolidColorBrush(Color.FromRgb(50, 50, 50)),
+                Foreground = System.Windows.Media.Brushes.White,
+                FontSize = 14,
+                Cursor = Cursors.Hand
+            };
+            cancelButton.Click += (s, e) => { dialog.DialogResult = false; dialog.Close(); };
+            buttonPanel.Children.Add(cancelButton);
+
+            panel.Children.Add(buttonPanel);
+            dialog.Content = panel;
+
+            // Set enter key to submit
+            inputBox.KeyDown += (s, e) =>
+            {
+                if (e.Key == Key.Enter)
                 {
-                    MessageBox.Show("Please add a task first.", "Missing Task",
-                        MessageBoxButton.OK, MessageBoxImage.Warning);
+                    dialog.DialogResult = true;
+                    dialog.Close();
+                }
+            };
+
+            // Focus the input box
+            dialog.Loaded += (s, e) => inputBox.Focus();
+
+            // Show dialog and get result
+            bool? result = dialog.ShowDialog();
+
+            if (result == true)
+            {
+                return inputBox.Text.Trim();
+            }
+            return null;
+        }
+
+        private void SetReminderButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // Step 1: Check if a task is selected
+                var selectedItem = TaskListBox.SelectedItem as TaskDisplayItem;
+
+                if (selectedItem == null)
+                {
+                    MessageBox.Show("📋 Please select a task from the list first.\n\n" +
+                                    "Tip: Click on a task in the list to highlight it, then click 'Set Reminder'.",
+                        "No Task Selected",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Information);
                     return;
                 }
 
-             
-                // GET TASKS AND SET REMINDER - ADDED HERE
-                
-                var tasks = taskManager.GetAllTasks(username);
-                var task = tasks.FirstOrDefault(t => t.Title.ToLower() == title.ToLower() && !t.IsCompleted);
+                // Step 2: Get the full task from database
+                var task = taskManager.GetTaskById(selectedItem.Id);
 
-                if (task != null)
+                if (task == null)
                 {
-                    task.SetReminder(7); // 7 days reminder
+                    MessageBox.Show("❌ Task not found in database. Please refresh the list.",
+                        "Error",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                    return;
+                }
+
+                // Step 3: Check if task is already completed
+                if (task.IsCompleted)
+                {
+                    MessageBox.Show($"✅ Task '{task.Title}' is already completed.\n\n" +
+                                    "Cannot set reminder for completed tasks.",
+                        "Task Completed",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Warning);
+                    return;
+                }
+
+                // Step 4: Show current reminder status
+                string currentReminder = task.ReminderDate.HasValue ?
+                    $"Current reminder: {task.ReminderDate.Value.ToShortDateString()}" :
+                    "No reminder set";
+
+                // Step 5: Show input dialog
+                string defaultDays = task.ReminderDate.HasValue ?
+                    ((int)(task.ReminderDate.Value - DateTime.Now).TotalDays).ToString() :
+                    "7";
+
+                string input = ShowInputDialog(
+                    "Set Reminder",
+                    $"🔔 Set Reminder for Task\n\n" +
+                    $"Task: {task.Title}\n" +
+                    $"Due Date: {task.DueDate.ToShortDateString()}\n" +
+                    $"{currentReminder}\n\n" +
+                    $"Enter number of days from now:\n" +
+                    $"(Enter 0 to clear reminder)",
+                    defaultDays);
+
+                // Step 6: Check if user cancelled
+                if (string.IsNullOrEmpty(input))
+                {
+                    return;
+                }
+
+                // Step 7: Validate input
+                if (!int.TryParse(input, out int days))
+                {
+                    MessageBox.Show("❌ Please enter a valid number.",
+                        "Invalid Input",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Warning);
+                    return;
+                }
+
+                // Step 8: Check for negative days
+                if (days < 0)
+                {
+                    MessageBox.Show("❌ Please enter a positive number of days.",
+                        "Invalid Input",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Warning);
+                    return;
+                }
+
+                // Step 9: Handle clearing reminder
+                if (days == 0)
+                {
+                    task.ClearReminder();
                     if (taskManager.UpdateTask(task))
                     {
-                        MessageBox.Show($"Reminder set for '{title}' in 7 days!", "Reminder Set",
-                            MessageBoxButton.OK, MessageBoxImage.Information);
+                        logger.AddLog($"Reminder cleared for '{task.Title}'");
+                        MessageBox.Show($"✅ Reminder cleared for '{task.Title}'.",
+                            "Reminder Cleared",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Information);
                         RefreshTaskList();
                     }
+                    return;
+                }
+
+                // Step 10: Set the reminder
+                task.SetReminder(days);
+
+                if (taskManager.UpdateTask(task))
+                {
+                    logger.LogReminderSet(task.Title, task.ReminderDate.Value);
+                    MessageBox.Show($"✅ Reminder set for '{task.Title}'!\n\n" +
+                                    $"📅 Reminder Date: {task.ReminderDate.Value.ToShortDateString()}\n" +
+                                    $"📆 Days from now: {days}\n\n" +
+                                    $"You will be reminded on {task.ReminderDate.Value.ToShortDateString()}.",
+                        "Reminder Set",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Information);
+                    RefreshTaskList();
                 }
                 else
                 {
-                    MessageBox.Show("Task not found or already completed.", "Error",
-                        MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("❌ Failed to set reminder. Please try again.",
+                        "Error",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
                 }
             }
+            catch (Exception ex)
+            {
+                logger.LogError($"SetReminderButton_Click error: {ex.Message}", ex.StackTrace);
+                MessageBox.Show($"❌ Error: {ex.Message}",
+                    "Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
+        }
 
-            private void BackToChatFromTasks_Click(object sender, RoutedEventArgs e)
+        private void BackToChatFromTasks_Click(object sender, RoutedEventArgs e)
             {
                 BackToChat();
             }
