@@ -62,6 +62,7 @@
     <Compile Include="QuizManager.cs" />
     <Compile Include="responds.cs" />
     <Compile Include="sentiment_detect.cs" />
+    <Compile Include="TaskManager.cs" />
     <Compile Include="user_name.cs" />
     <Compile Include="voice_greeting.cs" />
     <Page Include="MainWindow.xaml">
