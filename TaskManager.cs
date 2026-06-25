@@ -17,17 +17,16 @@ namespace Cybersecurity_Awareness_Chatbot_Part2
             {
                 this.logger = logger;
 
-            // ================================================
-            // TRY BOTH CONNECTION STRINGS
-            // ================================================
-            // Try LocalDB first
-            string connection = @"Data source = (localdb)\task_cyber,Database=cyber_task";
+                // ================================================
+                // TRY BOTH CONNECTION STRINGS
+                // ================================================
+                // Try LocalDB first
+                connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=chatbot_task;Integrated Security=True;";
 
+                // If that fails, try SQL Express
+                // connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=chatbot_task;Integrated Security=True;";
 
-            // If that fails, try SQL Express
-            // connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=chatbot_task;Integrated Security=True;";
-
-            TestConnection();
+                TestConnection();
                 CreateTableIfNotExists();
                 logger?.LogDatabaseConnection(isConnected, "TaskManager initialized");
             }
@@ -110,8 +109,7 @@ namespace Cybersecurity_Awareness_Chatbot_Part2
                             cmd.Parameters.AddWithValue("@tasks_description", task.Description ?? "");
                             cmd.Parameters.AddWithValue("@tasks_status", task.IsCompleted ? "done" : "pending");
                             cmd.Parameters.AddWithValue("@tasks_duedate", task.DueDate.ToString("yyyy-MM-dd"));
-                            cmd.Parameters.AddWithValue("@username", username);
-                            cmd.Parameters.AddWithValue("@created_date", DateTime.Now);
+                            
 
                             int rowsAffected = cmd.ExecuteNonQuery();
 
