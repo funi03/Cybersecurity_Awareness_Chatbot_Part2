@@ -88,23 +88,25 @@
             </StackPanel>
         </Grid>
 
-        <!-- ============================================ -->
         <!-- CHAT GRID -->
+
+        <!-- ============================================ -->
+        <!-- CHAT GRID (BUTTONS ON TOP, SEND AT BOTTOM) -->
         <!-- ============================================ -->
         <Grid x:Name="chat_grid" Visibility="Hidden">
             <Grid.RowDefinitions>
-                <RowDefinition Height="150"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
 
-            <!-- HEADER -->
+            <!-- HEADER WITH LOGO + NAVIGATION BUTTONS -->
             <Border Grid.Row="0"
-                    CornerRadius="10"
-                    Background="#2A2A40"
-                    BorderBrush="#00E5FF"
-                    BorderThickness="2"
-                    Margin="10,10,10,5">
+            CornerRadius="10"
+            Background="#2A2A40"
+            BorderBrush="#00E5FF"
+            BorderThickness="2"
+            Margin="10,10,10,5">
 
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -115,67 +117,97 @@
 
                     <!-- LOGO -->
                     <Image x:Name="imgLogo"
-                           Grid.Column="0"
-                           Width="100" Height="100"
-                           Margin="10"
-                           Source="/logo.jpeg"/>
+                   Grid.Column="0"
+                   Width="80" Height="80"
+                   Margin="10"
+                   Source="/logo.jpeg"/>
 
                     <!-- TITLE -->
                     <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="10,0">
                         <TextBlock Text="SECUREBOT"
-                                   FontSize="30" FontWeight="Bold"
-                                   Foreground="#00E5FF"/>
+                           FontSize="28" FontWeight="Bold"
+                           Foreground="#00E5FF"/>
                         <TextBlock Text="Cybersecurity Awareness Chatbot"
-                                   FontSize="16" Foreground="White"/>
+                           FontSize="14" Foreground="White"/>
                         <TextBlock x:Name="UserDisplay"
-                                   Text="Stay Safe • Stay Secure • Stay Smart"
-                                   FontSize="14" Foreground="#888888"/>
+                           Text="Stay Safe • Stay Secure • Stay Smart"
+                           FontSize="12" Foreground="#888888"/>
                     </StackPanel>
 
-                    <!-- NAVIGATION BUTTONS -->
+                    <!-- NAVIGATION BUTTONS (ALL ON TOP) -->
                     <StackPanel Grid.Column="2" Orientation="Horizontal" 
-                                VerticalAlignment="Center" Margin="10">
+                        VerticalAlignment="Center" Margin="10">
+
+                        <!-- Clear Chat Button -->
+                        <Button Content="🗑️ Clear Chat"
+                        Height="35" Padding="12,0"
+                        Margin="0,0,5,0"
+                        Background="#E74C3C" Foreground="White"
+                        BorderBrush="#C0392B" BorderThickness="1"
+                        FontWeight="SemiBold"
+                        FontSize="12"
+                        Cursor="Hand"
+                        Click="ClearChatButton_Click"/>
+
+                        <!-- Tasks Button -->
                         <Button Content="📋 Tasks"
-                                Width="85" Height="35" Margin="0,0,5,0"
-                                Background="#2A2A40" Foreground="#00E5FF"
-                                BorderBrush="#00E5FF" BorderThickness="1"
-                                Cursor="Hand"
-                                Click="TasksButton_Click"/>
+                        Height="35" Padding="12,0"
+                        Margin="0,0,5,0"
+                        Background="#2A2A40" Foreground="#00E5FF"
+                        BorderBrush="#00E5FF" BorderThickness="1"
+                        FontWeight="SemiBold"
+                        FontSize="12"
+                        Cursor="Hand"
+                        Click="TasksButton_Click"/>
+
+                        <!-- Quiz Button -->
                         <Button Content="🎯 Quiz"
-                                Width="85" Height="35" Margin="0,0,5,0"
-                                Background="#2A2A40" Foreground="#00E5FF"
-                                BorderBrush="#00E5FF" BorderThickness="1"
-                                Cursor="Hand"
-                                Click="QuizButton_Click"/>
+                        Height="35" Padding="12,0"
+                        Margin="0,0,5,0"
+                        Background="#2A2A40" Foreground="#00E5FF"
+                        BorderBrush="#00E5FF" BorderThickness="1"
+                        FontWeight="SemiBold"
+                        FontSize="12"
+                        Cursor="Hand"
+                        Click="QuizButton_Click"/>
+
+                        <!-- Log Button -->
                         <Button Content="📝 Log"
-                                Width="85" Height="35" Margin="0,0,5,0"
-                                Background="#2A2A40" Foreground="#00E5FF"
-                                BorderBrush="#00E5FF" BorderThickness="1"
-                                Cursor="Hand"
-                                Click="LogButton_Click"/>
+                        Height="35" Padding="12,0"
+                        Margin="0,0,5,0"
+                        Background="#2A2A40" Foreground="#00E5FF"
+                        BorderBrush="#00E5FF" BorderThickness="1"
+                        FontWeight="SemiBold"
+                        FontSize="12"
+                        Cursor="Hand"
+                        Click="LogButton_Click"/>
+
+                        <!-- Exit Button -->
                         <Button Content="❌ Exit"
-                                Width="85" Height="35"
-                                Background="#FF4444" Foreground="White"
-                                BorderBrush="DarkRed" BorderThickness="1"
-                                Cursor="Hand"
-                                Click="ExitButton_Click"/>
+                        Height="35" Padding="12,0"
+                        Background="#FF4444" Foreground="White"
+                        BorderBrush="DarkRed" BorderThickness="1"
+                        FontWeight="SemiBold"
+                        FontSize="12"
+                        Cursor="Hand"
+                        Click="ExitButton_Click"/>
                     </StackPanel>
                 </Grid>
             </Border>
 
             <!-- CHAT AREA -->
             <Border Grid.Row="1"
-                    Margin="10,5,10,5"
-                    Background="#101728"
-                    BorderBrush="#00E5FF" BorderThickness="2"
-                    CornerRadius="10">
+            Margin="10,5,10,5"
+            Background="#101728"
+            BorderBrush="#00E5FF" BorderThickness="2"
+            CornerRadius="10">
                 <RichTextBox x:Name="txtChat"
-                             Background="#101728"
-                             Foreground="White"
-                             FontSize="14"
-                             BorderThickness="0"
-                             IsReadOnly="True"
-                             VerticalScrollBarVisibility="Auto">
+                     Background="#101728"
+                     Foreground="White"
+                     FontSize="14"
+                     BorderThickness="0"
+                     IsReadOnly="True"
+                     VerticalScrollBarVisibility="Auto">
                     <RichTextBox.Resources>
                         <Style TargetType="{x:Type Paragraph}">
                             <Setter Property="Margin" Value="0,2,0,2"/>
@@ -184,60 +216,38 @@
                 </RichTextBox>
             </Border>
 
-            <!-- INPUT SECTION -->
+            <!-- INPUT SECTION (SEND BUTTON ONLY AT BOTTOM) -->
             <Grid Grid.Row="2" Margin="10,0,10,10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
                 <TextBox x:Name="txtUserInput"
-                         Grid.Column="0"
-                         Height="35"
-                         Margin="0,0,10,0"
-                         FontSize="14"
-                         Background="#1A1A2E"
-                         Foreground="White"
-                         BorderBrush="#00E5FF"
-                         BorderThickness="1"
-                         KeyDown="TxtUserInput_KeyDown"/>
+                 Grid.Column="0"
+                 Height="35"
+                 Margin="0,0,10,0"
+                 FontSize="14"
+                 Background="#1A1A2E"
+                 Foreground="White"
+                 BorderBrush="#00E5FF"
+                 BorderThickness="1"
+                 KeyDown="TxtUserInput_KeyDown"/>
 
                 <Button x:Name="btnSend"
-                        Grid.Column="1"
-                        Height="35" Width="80"
-                        Margin="0,0,5,0"
-                        Content="📤 Send"
-                        FontWeight="Bold"
-                        Background="#00E5FF"
-                        Foreground="Black"
-                        Cursor="Hand"
-                        Click="btnSend_Click"/>
-
-                <Button x:Name="btnQuiz"
-                        Grid.Column="2"
-                        Height="35" Width="80"
-                        Margin="0,0,5,0"
-                        Content="🎯 Quiz"
-                        FontWeight="Bold"
-                        Background="#9B59B6"
-                        Foreground="White"
-                        Cursor="Hand"
-                        Click="QuizButton_Click"/>
-
-                <Button x:Name="btnTasks"
-                        Grid.Column="3"
-                        Height="35" Width="80"
-                        Content="📋 Tasks"
-                        FontWeight="Bold"
-                        Background="#2C3E50"
-                        Foreground="White"
-                        Cursor="Hand"
-                        Click="TasksButton_Click"/>
+                Grid.Column="1"
+                Height="35" Width="80"
+                Content="📤 Send"
+                FontWeight="Bold"
+                FontSize="14"
+                Background="#00E5FF"
+                Foreground="Black"
+                Cursor="Hand"
+                Click="btnSend_Click"/>
             </Grid>
         </Grid>
-
+        
+        
         <!-- ============================================ -->
         <!-- TASKS GRID (UPDATED WITH CONSISTENT COLORS) -->
         <!-- ============================================ -->
@@ -348,65 +358,124 @@
                 </Border>
 
                 <!-- Add Task Panel -->
-                <Border Grid.Column="1" Background="#1A1A2E" 
-                        CornerRadius="10" BorderBrush="#00E5FF" 
-                        BorderThickness="1" Padding="15">
-                    <StackPanel>
-                        <TextBlock Text="➕ Add New Task" 
-                                   FontSize="18" FontWeight="Bold" 
-                                   Foreground="White" Margin="0,0,0,15"/>
+                
+                    <Border Grid.Column="1" Background="#1A1A2E" 
+        CornerRadius="10" BorderBrush="#00E5FF" 
+        BorderThickness="1" Padding="15">
+                        <StackPanel>
+                            <TextBlock Text="➕ Add New Task" 
+                   FontSize="18" FontWeight="Bold" 
+                   Foreground="White" Margin="0,0,0,15"/>
 
-                        <TextBlock Text="Title" Foreground="#888888" FontSize="12"/>
-                        <TextBox x:Name="TaskTitleInput" Height="30" 
-                                 Margin="0,5,0,10" Padding="5"
-                                 Background="#101728" Foreground="White"
-                                 BorderBrush="#00E5FF" BorderThickness="1"/>
+                            <!-- TITLE -->
+                            <TextBlock Text="Title" 
+                   Foreground="#00E5FF" 
+                   FontSize="12" 
+                   FontWeight="SemiBold"
+                   Margin="0,0,0,3"/>
+                            <TextBox x:Name="TaskTitleInput" 
+                 Height="35" 
+                 Margin="0,0,0,15" 
+                 Padding="10"
+                 Background="#101728" 
+                 Foreground="White"
+                 BorderBrush="#00E5FF" 
+                 BorderThickness="1"
+                 FontSize="14"/>
 
-                        <TextBlock Text="Description" Foreground="#888888" FontSize="12"/>
-                        <TextBox x:Name="TaskDescriptionInput" Height="60" 
-                                 Margin="0,5,0,10" Padding="5"
-                                 Background="#101728" Foreground="White"
-                                 BorderBrush="#00E5FF" BorderThickness="1"
-                                 TextWrapping="Wrap"/>
+                            <!-- DESCRIPTION -->
+                            <TextBlock Text="Description" 
+                   Foreground="#00E5FF" 
+                   FontSize="12" 
+                   FontWeight="SemiBold"
+                   Margin="0,0,0,3"/>
+                            <TextBox x:Name="TaskDescriptionInput" 
+                 Height="60" 
+                 Margin="0,0,0,15" 
+                 Padding="10"
+                 Background="#101728" 
+                 Foreground="White"
+                 BorderBrush="#00E5FF" 
+                 BorderThickness="1"
+                 TextWrapping="Wrap"
+                 FontSize="14"/>
 
-                        <TextBlock Text="Due Date" Foreground="#888888" FontSize="12"/>
-                        <DatePicker x:Name="TaskDueDatePicker" 
-                                    Margin="0,5,0,10"
-                                    Background="#101728" Foreground="White"
-                                    BorderBrush="#00E5FF" BorderThickness="1"/>
+                            <!-- DUE DATE -->
+                            <TextBlock Text="Due Date" 
+                   Foreground="#00E5FF" 
+                   FontSize="12" 
+                   FontWeight="SemiBold"
+                   Margin="0,0,0,3"/>
+                            <DatePicker x:Name="TaskDueDatePicker" 
+                    Height="35"
+                    Margin="0,0,0,15"
+                    Background="#101728" 
+                    Foreground="White"
+                    BorderBrush="#00E5FF" 
+                    BorderThickness="1"
+                    FontSize="14">
+                                <DatePicker.Resources>
+                                    <Style TargetType="DatePickerTextBox">
+                                        <Setter Property="Background" Value="#101728"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                        <Setter Property="BorderBrush" Value="#00E5FF"/>
+                                        <Setter Property="BorderThickness" Value="1"/>
+                                        <Setter Property="FontSize" Value="14"/>
+                                    </Style>
+                                </DatePicker.Resources>
+                            </DatePicker>
 
-                        <TextBlock Text="Priority" Foreground="#888888" FontSize="12"/>
-                        <ComboBox x:Name="TaskPriorityCombo" 
-                                  Margin="0,5,0,15" Height="30"
-                                  Background="#101728" Foreground="White"
-                                  BorderBrush="#00E5FF" BorderThickness="1">
-                            <ComboBoxItem Content=" Low"/>
-                            <ComboBoxItem Content=" Medium" IsSelected="True"/>
-                            <ComboBoxItem Content="High"/>
-                            <ComboBoxItem Content=" Critical"/>
-                        </ComboBox>
+                            <!-- PRIORITY -->
+                            <TextBlock Text="Priority" 
+                   Foreground="#00E5FF" 
+                   FontSize="12" 
+                   FontWeight="SemiBold"
+                   Margin="0,0,0,3"/>
+                            <ComboBox x:Name="TaskPriorityCombo" 
+                  Height="35"
+                  Margin="0,0,0,15"
+                  Background="#101728" 
+                  Foreground="White"
+                  BorderBrush="#00E5FF" 
+                  BorderThickness="1"
+                  FontSize="14">
+                                <ComboBoxItem Content="🟢 Low" />
+                                <ComboBoxItem Content="🟡 Medium" IsSelected="True"/>
+                                <ComboBoxItem Content="🟠 High"/>
+                                <ComboBoxItem Content="🔴 Critical"/>
+                            </ComboBox>
 
-                        <Button Content="✅ Add Task" Height="40"
-                                Background="#27AE60" Foreground="White"
-                                FontWeight="Bold"
-                                Cursor="Hand"
-                                Click="AddTaskButton_Click"/>
+                            <!-- BUTTONS -->
+                            <Button Content="✅ Add Task" 
+                Height="40"
+                Margin="0,5,0,10"
+                Background="#27AE60" 
+                Foreground="White"
+                FontWeight="Bold"
+                FontSize="14"
+                Cursor="Hand"
+                Click="AddTaskButton_Click"/>
 
-                        <Button Content="🔔 Set Reminder" Height="40"
-                                Margin="0,10,0,0"
-                                Background="#F39C12" Foreground="White"
-                                FontWeight="Bold"
-                                Cursor="Hand"
-                                Click="SetReminderButton_Click"/>
+                            <Button Content="🔔 Set Reminder" 
+                Height="40"
+                Margin="0,0,0,10"
+                Background="#F39C12" 
+                Foreground="White"
+                FontWeight="Bold"
+                FontSize="14"
+                Cursor="Hand"
+                Click="SetReminderButton_Click"/>
 
-                        <Button Content="⬅ Back to Chat" Height="40"
-                                Margin="0,10,0,0"
-                                Background="#2C3E50" Foreground="White"
-                                FontWeight="Bold"
-                                Cursor="Hand"
-                                Click="BackToChatFromTasks_Click"/>
-                    </StackPanel>
-                </Border>
+                            <Button Content="⬅ Back to Chat" 
+                Height="40"
+                Background="#2C3E50" 
+                Foreground="White"
+                FontWeight="Bold"
+                FontSize="14"
+                Cursor="Hand"
+                Click="BackToChatFromTasks_Click"/>
+                        </StackPanel>
+                    </Border>
             </Grid>
         </Grid>
 
