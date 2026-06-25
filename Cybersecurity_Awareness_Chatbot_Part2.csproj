@@ -57,6 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="ActivityLogger.cs" />
     <Compile Include="chatbot.cs" />
+    <Compile Include="CyberTask.cs" />
     <Compile Include="helper.cs" />
     <Compile Include="memory_recall.cs" />
     <Compile Include="Question_in_quiz.cs" />
