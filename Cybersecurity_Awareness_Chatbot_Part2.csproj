@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ActivityLogger.cs" />
     <Compile Include="chatbot.cs" />
     <Compile Include="helper.cs" />
     <Compile Include="memory_recall.cs" />
