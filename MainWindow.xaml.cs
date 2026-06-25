@@ -897,57 +897,55 @@ namespace Cybersecurity_Awareness_Chatbot_Part2
             try
             {
                 taskItems.Clear();
+
+                // Get tasks from database
                 var tasks = taskManager.GetAllTasks(username);
+
+                // ================================================
+                // ✅ DEBUG: Show how many tasks were found
+                // ================================================
+                MessageBox.Show($"Found {tasks.Count} tasks in database for user '{username}'",
+                    "Debug", MessageBoxButton.OK, MessageBoxImage.Information);
+                // ================================================
+
+                if (tasks == null || tasks.Count == 0)
+                {
+                    taskItems.Add(new TaskDisplayItem
+                    {
+                        Id = -1,
+                        Title = "📭 No tasks found",
+                        Description = "Click 'Add Task' to create your first task!",
+                        DueDateDisplay = "",
+                        StatusIcon = "📭",
+                        PriorityIcon = "",
+                        PriorityText = "",
+                        PriorityColor = new SolidColorBrush(Color.FromRgb(136, 136, 136)),
+                        BorderBackground = new SolidColorBrush(Color.FromRgb(30, 30, 50))
+                    });
+                    return;
+                }
+
+                // ================================================
+                // DEBUG: Show the first task details
+                // ================================================
+                var firstTask = tasks.FirstOrDefault();
+                if (firstTask != null)
+                {
+                    MessageBox.Show($"First Task:\nID: {firstTask.Id}\nTitle: {firstTask.Title}\nDescription: {firstTask.Description}",
+                        "First Task", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                // ================================================
 
                 foreach (var task in tasks)
                 {
-                    // Determine priority color
-                    Brush priorityColor;
-                    string priorityText;
-
-                    switch (task.Priority)
-                    {
-                        case CyberTask.PriorityLevel.Low:
-                            priorityColor = new SolidColorBrush(Color.FromRgb(0, 255, 100));  // Green
-                            priorityText = "🟢 Low Priority";
-                            break;
-                        case CyberTask.PriorityLevel.Medium:
-                            priorityColor = new SolidColorBrush(Color.FromRgb(255, 255, 0));  // Yellow
-                            priorityText = "🟡 Medium Priority";
-                            break;
-                        case CyberTask.PriorityLevel.High:
-                            priorityColor = new SolidColorBrush(Color.FromRgb(255, 165, 0));  // Orange
-                            priorityText = "🟠 High Priority";
-                            break;
-                        case CyberTask.PriorityLevel.Critical:
-                            priorityColor = new SolidColorBrush(Color.FromRgb(255, 0, 0));    // Red
-                            priorityText = "🔴 Critical Priority";
-                            break;
-                        default:
-                            priorityColor = new SolidColorBrush(Color.FromRgb(255, 255, 0));  // Yellow
-                            priorityText = "🟡 Medium Priority";
-                            break;
-                    }
-
-                    taskItems.Add(new TaskDisplayItem
-                    {
-                        Id = task.Id,
-                        Title = task.Title,
-                        Description = task.Description,
-                        DueDateDisplay = $"📅 {task.DueDate.ToShortDateString()}",
-                        StatusIcon = task.IsCompleted ? "✅" : "⏳",
-                        PriorityIcon = task.GetPriorityIcon(),
-                        PriorityText = priorityText,
-                        PriorityColor = priorityColor,
-                        BorderBackground = task.IsCompleted ?
-                            new SolidColorBrush(Color.FromRgb(40, 60, 40)) :
-                            new SolidColorBrush(Color.FromRgb(40, 40, 60))
-                    });
+                    // ... rest of your code to add tasks to the list ...
                 }
             }
             catch (Exception ex)
             {
                 logger.LogError($"Error refreshing tasks: {ex.Message}", ex.StackTrace);
+                MessageBox.Show($"Error refreshing tasks:\n\n{ex.Message}",
+                    "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         private string GetPriorityIcon(CyberTask.PriorityLevel priority)
